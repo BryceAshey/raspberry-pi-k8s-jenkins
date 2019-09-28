@@ -1,4 +1,4 @@
-FROM openjdk:8-jdk
+FROM armv7/armhf-java8
 
 ARG VERSION=3.35
 ARG user=jenkins
