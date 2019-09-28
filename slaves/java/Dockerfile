@@ -1,6 +1,6 @@
 FROM resin/rpi-raspbian:buster-20190121
 
-RUN apt-get update && apt-get upgrade
+RUN apt-get update && apt-get upgrade && install -y apt-utils
 
 RUN echo "deb http://ftp.debian.org/debian buster-backports main" | sudo tee /etc/apt/sources.list.d/backports.list && \
     apt-key adv --keyserver hkp://keyserver.ubuntu.com --recv-keys 04EE7237B7D453EC && \
