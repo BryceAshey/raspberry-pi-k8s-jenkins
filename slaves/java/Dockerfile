@@ -1,5 +1,7 @@
 FROM armv7/armhf-java8
 
+RUN apt-get update && apt-get upgrade
+
 ARG VERSION=3.35
 ARG user=jenkins
 ARG group=jenkins
@@ -13,8 +15,8 @@ LABEL Description="This is a base image, which provides the Jenkins agent execut
 
 ARG AGENT_WORKDIR=/home/${user}/agent
 
-RUN echo 'deb http://deb.debian.org/debian stretch-backports main' > /etc/apt/sources.list.d/stretch-backports.list
-RUN apt-get update && apt-get install -t stretch-backports git-lfs
+#RUN echo 'deb http://deb.debian.org/debian stretch-backports main' > /etc/apt/sources.list.d/stretch-backports.list
+#RUN apt-get update && apt-get install -t stretch-backports git-lfs
 RUN curl --create-dirs -fsSLo /usr/share/jenkins/agent.jar https://repo.jenkins-ci.org/public/org/jenkins-ci/main/remoting/${VERSION}/remoting-${VERSION}.jar \
   && chmod 755 /usr/share/jenkins \
   && chmod 644 /usr/share/jenkins/agent.jar \
