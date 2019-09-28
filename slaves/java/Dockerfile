@@ -3,8 +3,8 @@ FROM resin/rpi-raspbian:buster-20190121
 RUN apt-get update && apt-get upgrade
 
 RUN echo "deb http://ftp.debian.org/debian buster-backports main" | sudo tee /etc/apt/sources.list.d/backports.list && \
-    apt-key adv --keyserver hkp://p80.pool.sks-keyservers.net:80 --recv-keys 8B48AD6246925553 && \
-    apt-key adv --keyserver hkp://p80.pool.sks-keyservers.net:80 --recv-keys 7638D0442B90D010 && \
+    apt-key adv --keyserver hkp://keyserver.ubuntu.com --recv-keys 04EE7237B7D453EC && \
+    apt-key adv --keyserver hkp://keyserver.ubuntu.com --recv-keys 648ACFD622F3D138 && \
     apt-get update && \
     apt-get -t buster-backports install -y openjdk-8-jre-headless=8u222-b10-1 --no-install-recommends && \
     rm -rf /var/lib/apt/lists/*
