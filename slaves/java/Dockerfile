@@ -1,4 +1,4 @@
-FROM arm32v7/openjdk
+FROM balenalib/raspberry-pi-alpine-openjdk:latest
 
 ARG VERSION=3.35
 ARG user=jenkins
