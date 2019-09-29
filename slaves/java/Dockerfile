@@ -1,19 +1,4 @@
-FROM resin/rpi-raspbian:buster-20190121
-
-RUN apt-get update && apt-get upgrade && apt-get install -y apt-utils
-
-RUN echo "deb http://ftp.debian.org/debian buster-backports main" | sudo tee /etc/apt/sources.list.d/backports.list && \
-    apt-key adv --keyserver keyserver.ubuntu.com --recv-keys 04EE7237B7D453EC && \
-    apt-key adv --keyserver keyserver.ubuntu.com --recv-keys 648ACFD622F3D138 && \
-    apt-get update && \
-    apt-get -t buster-backports install -y openjdk-8-jre-headless=8u222-b10-1 --no-install-recommends && \
-    rm -rf /var/lib/apt/lists/*
-
-# Define working directory
-WORKDIR /data
-
-# Define commonly used JAVA_HOME variable
-ENV JAVA_HOME /usr/lib/jvm/java-8-openjdk-armhf
+FROM arm32v7/openjdk
 
 ARG VERSION=3.35
 ARG user=jenkins
@@ -21,15 +6,14 @@ ARG group=jenkins
 ARG uid=1000
 ARG gid=1000
 
-
 RUN groupadd -g ${gid} ${group}
 RUN useradd -c "Jenkins user" -d /home/${user} -u ${uid} -g ${gid} -m ${user}
 LABEL Description="This is a base image, which provides the Jenkins agent executable (agent.jar)" Vendor="Jenkins project" Version="${VERSION}"
 
 ARG AGENT_WORKDIR=/home/${user}/agent
 
-#RUN echo 'deb http://deb.debian.org/debian stretch-backports main' > /etc/apt/sources.list.d/stretch-backports.list
-#RUN apt-get update && apt-get install -t stretch-backports git-lfs
+RUN echo 'deb http://deb.debian.org/debian stretch-backports main' > /etc/apt/sources.list.d/stretch-backports.list
+RUN apt-get update && apt-get install -t stretch-backports git-lfs
 RUN curl --create-dirs -fsSLo /usr/share/jenkins/agent.jar https://repo.jenkins-ci.org/public/org/jenkins-ci/main/remoting/${VERSION}/remoting-${VERSION}.jar \
   && chmod 755 /usr/share/jenkins \
   && chmod 644 /usr/share/jenkins/agent.jar \
