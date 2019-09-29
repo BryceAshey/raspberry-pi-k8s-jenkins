@@ -1,6 +1,9 @@
 FROM arm32v7/debian:buster-20190910
 
-RUN apt-get install openjdk-8-jdk
+RUN apt-get install -y software-properties-common
+RUN add-apt-repository "deb http://ppa.launchpad.net/webupd8team/java/ubuntu xenial main"
+RUN apt-get update
+RUN apt-get install -y oracle-java8-installer
 
 ARG VERSION=3.35
 ARG user=jenkins
