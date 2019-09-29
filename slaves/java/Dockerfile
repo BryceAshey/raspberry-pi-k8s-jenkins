@@ -1,4 +1,6 @@
-FROM balenalib/raspberry-pi-openjdk:latest
+FROM arm32v7/debian:buster-20190910
+
+RUN apt-get install openjdk-8-jdk
 
 ARG VERSION=3.35
 ARG user=jenkins
