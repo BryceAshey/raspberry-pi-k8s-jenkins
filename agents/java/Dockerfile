@@ -1,9 +1,19 @@
 FROM arm32v7/debian:buster-20190910
 
-RUN apt-get install -y software-properties-common
-RUN add-apt-repository "deb http://ppa.launchpad.net/webupd8team/java/ubuntu xenial main"
 RUN apt-get update
-RUN apt-get install -y oracle-java8-installer
+RUN apt-get install -y software-properties-common
+RUN apt-get install -y gnupg dirmngr curl tar
+
+RUN gpg --keyserver hkp://keyserver.ubuntu.com:80 --recv C2518248EEA14886
+RUN gpg --export --armor C2518248EEA14886| apt-key add -
+
+RUN echo "deb http://ppa.launchpad.net/webupd8team/java/ubuntu xenial main" | tee /etc/apt/sources.list.d/webupd8team-java.list
+RUN echo "deb-src http://ppa.launchpad.net/webupd8team/java/ubuntu xenial main" | tee -a /etc/apt/sources.list.d/webupd8team-java.list
+#RUN apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv-keys EEA14886
+
+#RUN add-apt-repository "deb http://ppa.launchpad.net/webupd8team/java/ubuntu xenial main"
+RUN apt-get update
+RUN apt-get install -y default-jdk
 
 ARG VERSION=3.35
 ARG user=jenkins
@@ -18,7 +28,7 @@ LABEL Description="This is a base image, which provides the Jenkins agent execut
 ARG AGENT_WORKDIR=/home/${user}/agent
 
 RUN echo 'deb http://deb.debian.org/debian stretch-backports main' > /etc/apt/sources.list.d/stretch-backports.list
-RUN apt-get update && apt-get install -t stretch-backports git-lfs
+RUN apt-get update && apt-get install -y -t stretch-backports git-lfs
 RUN curl --create-dirs -fsSLo /usr/share/jenkins/agent.jar https://repo.jenkins-ci.org/public/org/jenkins-ci/main/remoting/${VERSION}/remoting-${VERSION}.jar \
   && chmod 755 /usr/share/jenkins \
   && chmod 644 /usr/share/jenkins/agent.jar \
