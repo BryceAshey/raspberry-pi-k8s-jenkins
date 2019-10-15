@@ -40,7 +40,11 @@ Assuming you setup the volume as outlined above the easiest way to get the Unloc
 
 ## Additional Reading
 [Scaling Jenkins](https://rancher.com/blog/2018/2018-11-27-scaling-jenkins/)
+
 [JNLP Docker Image](https://hub.docker.com/r/jenkinsci/jnlp-slave)
+
 [Kubernetes Plugin](https://plugins.jenkins.io/kubernetes)
+
 [Kubernetes Plugin Github](https://github.com/jenkinsci/kubernetes-plugin)
+
 [Configuring Certificates for Jenkins Kubernetes Plugin](https://illya-chekrygin.com/2017/08/26/configuring-certificates-for-jenkins-kubernetes-plugin-0-12/)
