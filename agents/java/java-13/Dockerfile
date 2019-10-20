@@ -16,7 +16,7 @@ RUN apt-get update
 RUN apt-get install -y default-jdk
 RUN mkdir -p /usr/local/java/
 #RUN ln -s /usr/lib/jvm/default-java/ /usr/local/java/
-RUN find /usr/local/java/default-java -maxdepth 1 -mindepth 1 -type d -exec ln -s '{}' /usr/local/java/ \;
+RUN find /usr/lib/jvm/default-java/ -maxdepth 1 -mindepth 1 -type d -exec ln -s '{}' /usr/local/java/ \;
 
 # install jenkins
 ARG VERSION=3.35
