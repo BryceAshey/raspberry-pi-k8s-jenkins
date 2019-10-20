@@ -14,6 +14,8 @@ RUN apt-get update
 
 # install jdk-8 so that the jenkins agent runs
 RUN apt-get install -y default-jdk
+RUN mkdir -p /usr/local/java/bin/
+RUN ln -s /usr/lib/jvm/default-java/bin/ /usr/local/java/bin/
 
 # install jenkins
 ARG VERSION=3.35
@@ -42,9 +44,6 @@ RUN mkdir /home/${user}/.jenkins && mkdir -p ${AGENT_WORKDIR}
 VOLUME /home/${user}/.jenkins
 VOLUME ${AGENT_WORKDIR}
 WORKDIR /home/${user}
-
-RUN mkdir -p /usr/local/java/bin/
-RUN ln -s /usr/lib/jvm/default-java/bin/ /usr/local/java/bin/
 
 # installing Maven  
 
