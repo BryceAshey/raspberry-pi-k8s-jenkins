@@ -43,7 +43,8 @@ VOLUME /home/${user}/.jenkins
 VOLUME ${AGENT_WORKDIR}
 WORKDIR /home/${user}
 
-RUN ln -s /usr/lib/jvm/default-java/bin/java /usr/local/java/bin/java
+RUN mkdir -p /usr/local/java/bin/
+RUN ln -s /usr/lib/jvm/default-java/bin/ /usr/local/java/bin/
 
 # installing Maven  
 
