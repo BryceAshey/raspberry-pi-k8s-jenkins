@@ -43,6 +43,8 @@ VOLUME /home/${user}/.jenkins
 VOLUME ${AGENT_WORKDIR}
 WORKDIR /home/${user}
 
+RUN ln -s /usr/lib/jvm/default-java/bin/java /usr/local/java/bin/java
+
 # installing Maven  
 
 ARG MAVEN_VERSION=3.6.2
