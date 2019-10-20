@@ -14,8 +14,8 @@ RUN apt-get update
 
 # install jdk-8 so that the jenkins agent runs
 RUN apt-get install -y default-jdk
-RUN mkdir -p /usr/local/java/bin/
-RUN ln -s /usr/lib/jvm/default-java/bin/ /usr/local/java/bin/
+RUN mkdir -p /usr/local/java/
+RUN ln -s /usr/lib/jvm/default-java/ /usr/local/java/
 
 # install jenkins
 ARG VERSION=3.35
