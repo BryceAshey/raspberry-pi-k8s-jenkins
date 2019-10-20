@@ -27,5 +27,5 @@ spec:
       volumes:
       - name: jenkins-home
         persistentVolumeClaim:
-          claimName: jenkins-gluster-claim
+          claimName: jenkins-claim
           
