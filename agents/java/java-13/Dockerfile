@@ -77,7 +77,9 @@ RUN apt-get install -f -y
 RUN rm -f /tmp/bellsoft-jdk13-linux-arm32-vfp-hflt.deb
 
 # docker support
-RUN curl -sL get.docker.com | sed 's/9)/10)/' | sh
+RUN curl -sL get.docker.com | sh
+RUN usermod -aG docker your-user
+
 #TODO add docker login driven from args
 
 # JNLP Snippet
