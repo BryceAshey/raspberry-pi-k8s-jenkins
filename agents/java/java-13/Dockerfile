@@ -78,7 +78,7 @@ RUN rm -f /tmp/bellsoft-jdk13-linux-arm32-vfp-hflt.deb
 
 # docker support
 RUN apt-get install -y apt-transport-https ca-certificates curl gnupg2 software-properties-common
-RUN curl -fsSL https://download.docker.com/linux/debian/gpg | sudo apt-key add -
+RUN curl -fsSL https://download.docker.com/linux/debian/gpg | apt-key add -
 RUN apt-key fingerprint 0EBFCD88
 RUN add-apt-repository "deb [arch=armhf] https://download.docker.com/linux/debian $(lsb_release -cs) stable"
 RUN apt-get update
