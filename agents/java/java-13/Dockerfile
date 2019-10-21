@@ -66,16 +66,6 @@ RUN ln -s /usr/share/maven/bin/mvn /usr/bin/mvn
 ENV MAVEN_HOME /usr/share/maven
 ENV MAVEN_CONFIG "$USER_HOME_DIR/.m2"
 
-# jffi fix
-# https://github.com/spotify/docker-client/issues/477
-
-RUN apt-get install -y build-essential ant
-RUN git clone https://github.com/jnr/jffi.git
-RUN cd jffi
-RUN ant jar
-RUN cd build/jni
-RUN cp libjffi-1.2.so /usr/lib
-
 ###############################################################################################
 # Additional build dependencies
 ###############################################################################################
@@ -85,7 +75,10 @@ RUN curl --insecure -fsSL -o /tmp/bellsoft-jdk13-linux-arm32-vfp-hflt.deb https:
 RUN dpkg -i --force-depends /tmp/bellsoft-jdk13-linux-arm32-vfp-hflt.deb
 RUN apt-get install -f -y
 RUN rm -f /tmp/bellsoft-jdk13-linux-arm32-vfp-hflt.deb
-#RUN export JAVA_HOME=/usr/share/java13
+
+# docker support
+RUN curl -sL get.docker.com | sed 's/9)/10)/' | sh
+#TODO add docker login driven from args
 
 # JNLP Snippet
 
