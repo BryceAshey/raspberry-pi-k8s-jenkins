@@ -69,7 +69,7 @@ ENV MAVEN_CONFIG "$USER_HOME_DIR/.m2"
 # jffi fix
 # https://github.com/spotify/docker-client/issues/477
 
-RUN apt-get install -y build-essential
+RUN apt-get install -y build-essential ant
 RUN git clone https://github.com/jnr/jffi.git
 RUN cd jffi
 RUN ant jar
