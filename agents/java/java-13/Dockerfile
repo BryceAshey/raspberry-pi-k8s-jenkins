@@ -66,6 +66,16 @@ RUN ln -s /usr/share/maven/bin/mvn /usr/bin/mvn
 ENV MAVEN_HOME /usr/share/maven
 ENV MAVEN_CONFIG "$USER_HOME_DIR/.m2"
 
+# jffi fix
+# https://github.com/spotify/docker-client/issues/477
+
+RUN apt-get install build-essential
+RUN git clone https://github.com/jnr/jffi.git
+RUN cd jffi
+RUN ant jar
+RUN cd build/jni
+RUN cp libjffi-1.2.so /usr/lib
+
 ###############################################################################################
 # Additional build dependencies
 ###############################################################################################
