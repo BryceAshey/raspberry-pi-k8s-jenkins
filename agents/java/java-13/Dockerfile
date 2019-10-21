@@ -83,8 +83,8 @@ RUN apt-key fingerprint 0EBFCD88
 RUN add-apt-repository "deb [arch=armhf] https://download.docker.com/linux/debian $(lsb_release -cs) stable"
 RUN apt-get update
 RUN apt-get install -y docker-ce docker-ce-cli containerd.io
-
-#TODO add docker login driven from args
+RUN usermod jenkins -aG docker
+RUN newgrp docker
 
 # JNLP Snippet
 
