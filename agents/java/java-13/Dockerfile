@@ -84,7 +84,7 @@ RUN add-apt-repository "deb [arch=armhf] https://download.docker.com/linux/debia
 RUN apt-get update
 RUN apt-get install -y docker-ce docker-ce-cli containerd.io
 RUN usermod jenkins -aG docker
-RUN newgrp docker
+RUN service docker start
 
 # JNLP Snippet
 
