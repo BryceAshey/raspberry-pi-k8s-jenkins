@@ -86,6 +86,12 @@ RUN apt-get install -y docker-ce docker-ce-cli containerd.io
 RUN usermod jenkins -aG docker
 RUN service docker start
 
+# kubernetes support
+RUN curl -s https://packages.cloud.google.com/apt/doc/apt-key.gpg | apt-key add -
+RUN echo "deb http://apt.kubernetes.io/ kubernetes-xenial main" | tee /etc/apt/sources.list.d/kubernetes.list
+RUN apt-get update -q
+RUN apt-get install -qy kubeadm
+
 # JNLP Snippet
 
 COPY jenkins-agent /usr/local/bin/jenkins-agent
